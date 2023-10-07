@@ -1,0 +1,263 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Stack API",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/key-value/add": {
+            "post": {
+                "tags": [
+                    "Key-Value Store"
+                ],
+                "summary": "Add a key-value pair to the store",
+                "description": "Add a key-value pair to the store with an optional time-to-live (TTL) duration.",
+                "operationId": "8072e690307c27ad1ee3a21ff79a5062",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "key": {
+                                        "type": "string",
+                                        "example": "name"
+                                    },
+                                    "value": {
+                                        "type": "string",
+                                        "example": "John"
+                                    },
+                                    "ttl": {
+                                        "description": "Optional TTL in seconds",
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": 3600
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Key added successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Key added to the store"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/key-value/get": {
+            "get": {
+                "tags": [
+                    "Key-Value Store"
+                ],
+                "summary": "Get the value for a key",
+                "description": "Get the value for a key from the store, respecting the TTL if provided.",
+                "operationId": "1897fe8f60850d0a9ff181acb8607a6b",
+                "parameters": [
+                    {
+                        "name": "key",
+                        "in": "query",
+                        "description": "Key to retrieve the value",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "name"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Value retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "value": {
+                                            "type": "string",
+                                            "example": "John"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Key not found in the store",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Key not found in the store"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/key-value/delete": {
+            "delete": {
+                "tags": [
+                    "Key-Value Store"
+                ],
+                "summary": "Delete a key from the store",
+                "description": "Delete a key and its associated value from the store.",
+                "operationId": "a82a22eb975398ad5f627d734d07ff42",
+                "parameters": [
+                    {
+                        "name": "key",
+                        "in": "query",
+                        "description": "Key to delete from the store",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "name"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Key deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Key deleted from the store"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Key not found in the store",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Key not found in the store"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/stack/add": {
+            "post": {
+                "tags": [
+                    "Stack"
+                ],
+                "summary": "Add an item to the stack",
+                "description": "Add an item to the stack",
+                "operationId": "acad5b1e8e2837b70b26f37bd0524d92",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "content": {
+                                        "type": "string",
+                                        "example": "Hello World"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Item added successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Item added to the stack"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/stack/get": {
+            "get": {
+                "tags": [
+                    "Stack"
+                ],
+                "summary": "Get the top item from the stack",
+                "description": "Get the top item from the stack and remove it from the stack",
+                "operationId": "58e97de6f955d4f94e9372f322cfd1a7",
+                "responses": {
+                    "200": {
+                        "description": "Item retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "item": {
+                                            "type": "string",
+                                            "example": "Hello World"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Stack is empty",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Stack is empty"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
