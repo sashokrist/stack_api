@@ -37,7 +37,7 @@ class KeyValueStoreController extends Controller
     {
         $key = $request->input('key');
         $value = $request->input('value');
-        $ttl = $request->input('ttl'); // Optional TTL
+        $ttl = $request->input('ttl');
 
         if ($ttl) {
             Cache::put($key, $value, $ttl);

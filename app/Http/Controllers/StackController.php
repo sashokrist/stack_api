@@ -68,7 +68,7 @@ class StackController extends Controller
         $stackItem = StackItem::latest()->first();
 
         if ($stackItem) {
-            $stackItem->delete(); // Remove the item from the stack
+            $stackItem->delete();
             return response()->json(['item' => $stackItem->content]);
         }
 
